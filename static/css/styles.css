@@ -1,0 +1,17 @@
+#nprogress .bar {
+	height: 10px !important;
+}
+
+.ql-editor {
+	min-height: 200px !important;
+}
+.featured-image {
+	width: 100%;
+	max-height: 500px;
+	object-fit: cover;
+}
+#Navbar {
+	display: flex;
+	align-items: center;
+	align-content: center;
+}
