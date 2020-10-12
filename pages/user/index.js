@@ -1,7 +1,9 @@
+
 import Layout from '../../components/Layout';
 import Private from '../../components/authentication/Private';
 import Link from 'next/link';
-const UserIndex = () => {
+import MyBlogs from '../../components/MyBlogs';
+const UserIndex = ({response}) => {
 	return (
 		<Layout>
 			<Private>
@@ -30,6 +32,7 @@ const UserIndex = () => {
 						</div>
 						<div className="col-md-8 pt-4 text-center">
 							<h4>My Blogs</h4>
+							<MyBlogs response={response}/>
 						</div>
 					</div>
 				</div>
@@ -37,4 +40,20 @@ const UserIndex = () => {
 		</Layout>
 	);
 };
+// export async function getStaticProps(){
+//     const username=isAuth().username;
+//     console.log({username});
+//     const token=getCookie('token');
+//     console.log({token})
+//     console.log({query})
+    
+//     const response=await getAllBlogsForThisUser(username,token);
+    
+
+//     return {
+//         props:{
+//             response
+//         }
+//     }
+// }
 export default UserIndex;

@@ -9,7 +9,7 @@ const list = () => {
 			<Private>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-12 pt-4 pt-5">
+						<div className="col-md-12 pt-4 pt-5 mb-5 text-info ">
 							<h2>Manage Blogs</h2>
 						</div>
 						<div className="col-md-10 offset-md-1">

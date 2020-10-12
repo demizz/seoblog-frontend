@@ -180,6 +180,7 @@ export const getAllBlogsForThisUser = async (username, token) => {
 		success: false,
 		errorMessage: '',
 		result: null,
+		successMessage:''
 	};
 	console.log(API);
 	const res = await fetch(`${API}/users/${username}/blogs`, {

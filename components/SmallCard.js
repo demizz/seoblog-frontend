@@ -5,36 +5,43 @@ import { API } from '../config';
 const SmallCard = ({ blog }) => {
 	return (
 		<div className="card">
-			<section>
-				<Link href={`/blogs/${blog.slug}`}>
+			<div className="row" style={{display:'flex' ,alignItems:'center'}}>
+				<div className="col-md-5">
+
+			
+				<Link href={`/blogs/${blog.slug}`} style={{cursor:'pointer'}}>
 					<a>
 						<img
-							style={{ maxHeight: '150px', width: 'auto' }}
+							style={{ maxHeight: 'auto', width: 'auto' }}
 							src={`${API}/blogs/photo/${blog.slug}`}
 							alt={blog.title}
 							className="img img-fluid"
 						/>
 					</a>
 				</Link>
-			</section>
-			<div className="card-body">
-				<section>
-					<Link href={`/blogs/${blog.slug}`}>
-						<h5 className="card-title">{blog.title}</h5>
-					</Link>
-					<p className="card-text">{}</p>
-				</section>
-			</div>
+		
+				</div>
+				<div className="col-md-7">
 
 			<div className="card-body">
-				<Link href={`/blogs/${blog.slug}`}>
-					<a className="btn btn-primary pt-2">Read More</a>
-				</Link>
-				<div>
-					posted {moment(blog.updatedAt).fromNow()} by
-					<Link href={'/'}>
-						<a className="float-right">{blog.postedBy.username}</a>
+				
+					<Link href={`/blogs/${blog.slug}`} style={{cursor:'pointer'}}>
+						<a className="card-title h4 text-primary" style={{textTransform:'capitalize'}}><strong className=" text.danger" >Title :</strong>{blog.title}</a>
 					</Link>
+					<hr/>
+					<p className="card-text">{renderHtml(blog.body.substring(0,100))}</p>
+				
+		
+					<hr/>
+			
+				<div style={{fontStyle:'italic'}}>
+					posted {moment(blog.updatedAt).fromNow()} by &nbsp;
+					<Link href={'/'} style={{cursor:'pointer'}}>
+						<a className="h3 text-info">{blog.postedBy.name}</a>
+					</Link>
+				</div>
+			
+				</div>
 				</div>
 			</div>
 		</div>

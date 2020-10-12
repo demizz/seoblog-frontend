@@ -61,23 +61,9 @@ const ManageBlogsComponent = ({ username }) => {
 			deleteBlog(slug);
 		}
 	};
-	const showUpdateButton = (blog) => {
-		if (isAuth() && isAuth().role === 0) {
-			return (
-				<Link href={`/user/blog/updateBlog/${blog.slug}`}>
-					<a className="btn btn.small btn-info ml-5">Update</a>
-				</Link>
-			);
-		} else if (isAuth() && isAuth().role === 1) {
-			return (
-				<Link href={`/admin/crud/${blog.slug}`}>
-					<a className="btn btn.small ml-5">update</a>
-				</Link>
-			);
-		}
-	};
+	
 	const showBlogs = (blogs) => {
-		if (blogs.length === 0) {
+		if (!requestState.loading && blogs.length === 0) {
 			return (
 				<div className="alert alert-info">
 					you have not created Blogs yet may be create one
@@ -91,43 +77,61 @@ const ManageBlogsComponent = ({ username }) => {
 				blogs &&
 				blogs.map((blog, ind) => {
 					return (
-						<div key={ind} className="pb-5">
+						<div className="row border border-primary rounded pt-2 pb-2" style={{display:'flex',alignItems:'center'}}>
+							<div className="col-md-6">
+
 							<h3>{blog.title}</h3>
-							<p className="mark">
-								written by {blog.postedBy.name} |published on{' '}
-								{moment(blog.updatedAt).fromNow()}
-							</p>
+							</div>
+							<div className="col-md-3">
+
 							<button
-								className="btn btn-sm btn-danger"
+								className="btn btn btn-danger"
 								onClick={() => {
 									deleteConfirm(blog.slug);
 								}}
 							>
 								Delete
 							</button>
+							</div>
+							<div className="col-md-3">
 
-							{showUpdateButton(blog)}
+									<button className="btn btn btn-warning " >
+										<Link href={`/user/blog/updateBlog/${blog.slug}`}>
+					<a >Update</a>
+				</Link>
+									</button>
+							</div>
 						</div>
+						
 					);
 				})
 			);
 		}
 	};
-	const showError = () => {
+	const showResponseMessages = () => {
 		return (
+			<React.Fragment>
+
 			<div
 				className="alert alert-danger"
 				style={{ display: requestState.error ? '' : 'none' }}
-			>
+				>
 				{requestState.errorMessage}
 			</div>
+			<div
+				className="alert alert-info"
+				style={{ display: requestState.loading ? '' : 'none' }}
+				>
+				loading ...
+			</div>
+				</React.Fragment>
 		);
 	};
 	return (
 		<React.Fragment>
 			<div className="row">
 				<div className="col-md-10 offset-md-1">
-					{showError()}
+					{showResponseMessages()}
 					{message && <div className="alert alert-warning">{message}</div>}
 					{showBlogs(blogs)}
 				</div>

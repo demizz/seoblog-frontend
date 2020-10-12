@@ -22,26 +22,32 @@ const Card = ({ blog ,categories,tags}) => {
 		});
 	};
 	return (
-		<div className="lead">
-			<header>
+		<div className="card">
+			<header className="text-center text-info bg-success pt-2 pb-2">
 				<Link href={`/blogs/${blog.slug}`}>
 					<a>
-						<h5  >{blog.title}</h5>
+						<h3  >{blog.title}</h3>
 					</a>
 				</Link>
 			</header>
 			<section>
-				<p className="mark ml-1 pt-2 pb-2">
-					written by {blog.postedBy.name} | published{' '}
-					{moment(blog.updatedAt).fromNow()}
+				<p className=" ml-1 pt-2 pb-2" >
+					written by &nbsp;
+					<Link href={`/user`} >
+						<a className="h4 text-danger" style={{cursor:'pointer',textDecoration:'underline'}}>
+
+					{blog.postedBy.name} 
+						</a>
+					</Link>
+					&nbsp;&nbsp;{moment(blog.updatedAt).fromNow()}
 				</p>
 			</section>
 			<section>
 				{/* {showBlogCategories(categories)}
 				{showBlogTags(tags)} */}
 			</section>
-			<div className="row">
-				<div className="col-md-5">
+			<div className="row" style={{display:'flex',alignItems:'center',justifyItems:'center'}}>
+				<div className="col-md-5" style={{display:'flex',justifyContent:'center'}}>
 					<section>
 						<img
 							src={`${API}/blogs/photo/${blog.slug}`}
@@ -55,7 +61,7 @@ const Card = ({ blog ,categories,tags}) => {
 					<section>
 						{<div className="pb-3">{renderHtml(blog.body)}</div> }
 						<Link href={`/blogs/${blog.slug}`}>
-							<a href="" className="btn btn-primary pt-2">
+							<a href="" className="btn btn-primary pt-2 mb-2">
 								Read More
 							</a>
 						</Link>
