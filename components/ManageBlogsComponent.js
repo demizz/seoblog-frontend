@@ -3,11 +3,8 @@ import { useState, useEffect } from 'react';
 import router from 'next/router';
 import moment from 'moment';
 import { getCookie, isAuth } from '../RequestApi/authRequest';
-import {
-	removeBlog,
-	updateBlog,
-	getAllBlogsForThisUser,
-} from '../RequestApi/usersRequest';
+import { getAllBlogsForThisUser } from '../RequestApi/usersRequest';
+import { removeBlog } from '../RequestApi/blogRequest';
 const ManageBlogsComponent = ({ username }) => {
 	const [blogs, setBlogs] = useState([]);
 	const [message, setMessage] = useState('');
@@ -61,7 +58,7 @@ const ManageBlogsComponent = ({ username }) => {
 			deleteBlog(slug);
 		}
 	};
-	
+
 	const showBlogs = (blogs) => {
 		if (!requestState.loading && blogs.length === 0) {
 			return (
@@ -77,32 +74,31 @@ const ManageBlogsComponent = ({ username }) => {
 				blogs &&
 				blogs.map((blog, ind) => {
 					return (
-						<div className="row border border-primary rounded pt-2 pb-2" style={{display:'flex',alignItems:'center'}}>
+						<div
+							className="row border border-primary rounded pt-2 pb-2"
+							style={{ display: 'flex', alignItems: 'center' }}
+						>
 							<div className="col-md-6">
-
-							<h3>{blog.title}</h3>
+								<h3>{blog.title}</h3>
 							</div>
 							<div className="col-md-3">
-
-							<button
-								className="btn btn btn-danger"
-								onClick={() => {
-									deleteConfirm(blog.slug);
-								}}
-							>
-								Delete
-							</button>
+								<button
+									className="btn btn btn-danger"
+									onClick={() => {
+										deleteConfirm(blog.slug);
+									}}
+								>
+									Delete
+								</button>
 							</div>
 							<div className="col-md-3">
-
-									<button className="btn btn btn-warning " >
-										<Link href={`/user/blog/updateBlog/${blog.slug}`}>
-					<a >Update</a>
-				</Link>
-									</button>
+								<button className="btn btn btn-warning ">
+									<Link href={`/user/blog/updateBlog/${blog.slug}`}>
+										<a>Update</a>
+									</Link>
+								</button>
 							</div>
 						</div>
-						
 					);
 				})
 			);
@@ -111,20 +107,19 @@ const ManageBlogsComponent = ({ username }) => {
 	const showResponseMessages = () => {
 		return (
 			<React.Fragment>
-
-			<div
-				className="alert alert-danger"
-				style={{ display: requestState.error ? '' : 'none' }}
+				<div
+					className="alert alert-danger"
+					style={{ display: requestState.error ? '' : 'none' }}
 				>
-				{requestState.errorMessage}
-			</div>
-			<div
-				className="alert alert-info"
-				style={{ display: requestState.loading ? '' : 'none' }}
+					{requestState.errorMessage}
+				</div>
+				<div
+					className="alert alert-info"
+					style={{ display: requestState.loading ? '' : 'none' }}
 				>
-				loading ...
-			</div>
-				</React.Fragment>
+					loading ...
+				</div>
+			</React.Fragment>
 		);
 	};
 	return (

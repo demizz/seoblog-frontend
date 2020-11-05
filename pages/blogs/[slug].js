@@ -94,10 +94,7 @@ const SingleBlog = ({ router, blog }) => {
 							<h4 className="text-center pb-5 pb-3 h2">Related blogs</h4>
 							<div className="row">{showRelatedBlog(relatedBlog)}</div>
 						</div>
-						<div className="container pb-5">
-							<p>show Comment</p>
-							{/* { {JSON.stringify(relatedBlog)} } */}
-						</div>
+						<div className="container pb-5"></div>
 					</article>
 				</main>
 			</Layout>

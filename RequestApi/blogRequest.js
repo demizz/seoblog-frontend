@@ -14,8 +14,6 @@ export const createBlog = async (data, token) => {
 	const res = await fetch(`${API}/blogs/newBlog`, {
 		method: 'post',
 		headers: {
-			
-
 			authentication: 'Bearer ' + token,
 		},
 		body: data,
@@ -191,7 +189,7 @@ export const readPhoto = async (slug) => {
 		errorMessage: '',
 		result: null,
 	};
-	console.log(API);
+	console.log(`${API}/blogs/photo/${slug}`);
 	const res = await fetch(`${API}/blogs/photo/${slug}`, {
 		method: 'get',
 		headers: {
@@ -199,7 +197,7 @@ export const readPhoto = async (slug) => {
 			ContentType: 'application/json',
 		},
 	});
-	console.log(res);
+	console.log('res image', res);
 	const response = await res.json();
 	console.log({ response });
 	if (response.status === 'success') {
@@ -208,6 +206,7 @@ export const readPhoto = async (slug) => {
 			success: true,
 			result: response.result,
 		};
+		console.log('response image', response.result);
 	} else {
 		requestState = {
 			...requestState,
@@ -265,12 +264,11 @@ export const removeBlog = async (slug, token) => {
 	const res = await fetch(`${API}/blogs/${slug}`, {
 		method: 'delete',
 		headers: {
-			Accept: 'application/json',
 			'Content-Type': 'application/json',
 			authentication: 'Bearer ' + token,
 		},
 	});
-	console.log(res);
+
 	const response = await res.json();
 	console.log({ response });
 	if (response.status === 'success') {
@@ -287,7 +285,6 @@ export const removeBlog = async (slug, token) => {
 		};
 	}
 
-	console.log(requestState);
 	return requestState;
 };
 export const updateBlog = async (data, token, slug) => {
